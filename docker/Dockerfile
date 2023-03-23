@@ -1,4 +1,4 @@
-FROM php:7.0
-COPY . /usr/src/myapp
-WORKDIR /usr/src/myapp
+FROM php:7.4-apache
+COPY . /var/www/html//github.com/Leopoldadn/VideGrenierBloc5.2
+WORKDIR /var/www/html
 CMD [ "php", "./vendor/autoload.php" ]
