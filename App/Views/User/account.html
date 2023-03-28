@@ -5,7 +5,7 @@
 {% block body %}
 
 <div class="channel">
-
+ 130
     <div class="container-fluid account-header">
         <div class="row">
             <h1>
@@ -36,14 +36,23 @@
                                 <div class="col-lg-8 col-xs-6">
                                     <div class="btn-group bg-clean">
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Plus récent <span class="caret"></span>
                                         </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#"><i class="cv cvicon-cv-relevant"></i> Popularité</a></li>
-                                            <li><a href="#"><i class="cv cvicon-cv-calender"></i> Plus récent</a></li>
-                                        </ul>
+                                        <div class="col-lg-2 col-sm-2 col-xs-4">
+                                            <div class="btn-group pull-right bg-clean">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Filtrer par <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a onclick="getProductsAndRender('views')"><i
+                                                            class="cv cvicon-cv-calender"></i>
+                                                        Popularité</a></li>
+                                                    <li><a onclick="getProductsAndRender('date')"><i
+                                                            class="cv cvicon-cv-calender"></i>
+                                                        Récent</a></li>
+                                                </ul>
+                                            </div>
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
@@ -59,6 +68,18 @@
                                         </div>
                                         <div class="v-desc">
                                             <a href="{{ ('/product/' ~ article.id) }}">{{ article.name }}</a>
+                                            <button>x<script>
+                                                // Gestionnaire d'événements pour les boutons de suppression
+                                                document.querySelectorAll('button[type="submit"]').forEach(button => {
+                                                    button.addEventListener('click', event => {
+                                                        event.preventDefault();
+                                                        if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
+                                                            const formId = button.parentNode.parentNode.querySelector('form').id;
+                                                            document.getElementById(formId).submit();
+                                                        }
+                                                    });
+                                                });
+                                            </script></button>
                                         </div>
                                         <div class="v-views">
                                             {{article.views}} vues
