@@ -40,4 +40,17 @@ class Api extends \Core\Controller
         header('Content-Type: application/json');
         echo json_encode($cities);
     }
+
+    public function RemoveAction(){
+
+        $id = $_GET['id'];
+        echo ('remove article from data base with id : ');
+
+        Articles::remove($id);
+
+        header('Content-Type: application/json');
+        echo json_encode($id);
+        
+    }
+    
 }

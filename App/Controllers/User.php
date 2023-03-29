@@ -44,7 +44,7 @@ class User extends \Core\Controller
     {
         if(isset($_POST['submit'])){
             $f = $_POST;
-
+echo"test";
             if($f['password'] !== $f['password-check']){
                 // TODO: Gestion d'erreur côté utilisateur
             }
@@ -158,4 +158,6 @@ class User extends \Core\Controller
 
         return true;
     }
+
+    
 }

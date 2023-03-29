@@ -60,6 +60,7 @@
     <script type="text/javascript">
 
         function getProductsAndRender(option = ''){
+            console.log ("index");
             $.ajax({
                 url: "/api/products" + '?sort=' + option,
             }).done(function(result) {
@@ -94,3 +95,12 @@
         });
     </script>
 {% endblock %}
+
+
+
+
+
+
+
+
+
