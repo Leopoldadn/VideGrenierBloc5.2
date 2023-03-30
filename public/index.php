@@ -40,6 +40,8 @@ $router->add('mail', ['controller' => 'Product', 'action' => 'mail']);
 $router->add('cookie', ['controller' => 'Product', 'action' => 'cookie']);
 $router->add('confidentialiter', ['controller' => 'Product', 'action' => 'confidentialiter']);
 $router->add('{controller}/{action}');
+$router->add('product/contact', ['controller' => 'Product', 'action' => 'contact']);
+
 
 
 /*
