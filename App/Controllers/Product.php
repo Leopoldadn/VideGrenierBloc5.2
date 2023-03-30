@@ -67,5 +67,13 @@ class Product extends \Core\Controller
         ]);
     }
 
+    public function mailAction()
+    {
+        View::renderTemplate('User/mail.html');
+    }
     
+    public function cookieAction()
+    {
+        View::renderTemplate('User/cookie.html');
+    }
 }
