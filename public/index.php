@@ -37,6 +37,8 @@ $router->add('product', ['controller' => 'Product', 'action' => 'index', 'privat
 $router->add('product/{id:\d+}', ['controller' => 'Product', 'action' => 'show']);
 $router->add('oublie');
 $router->add('{controller}/{action}');
+$router->add('product/contact', ['controller' => 'Product', 'action' => 'contact']);
+
 
 
 /*

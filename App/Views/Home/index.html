@@ -19,7 +19,7 @@
                                             <span class="hidden-xs">À la une</span>
                                         </a>
                                     </li>
-                                    <li><a href="#" id="filter-location">Autour de moi</a><script src="public/bootstrap/js/location.js"></script></li>
+                                    <li><button onclick="getLocation()">Autour de moi </button></script></li>
                                     
                                 </ul>
                             </div>
@@ -93,6 +93,21 @@
         $( document ).ready(function() {
             getProductsAndRender();
         });
+        
+        var x = document.getElementById("demo");
+        function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+        }
+
+        function showPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;
+        }
+
     </script>
 {% endblock %}
 

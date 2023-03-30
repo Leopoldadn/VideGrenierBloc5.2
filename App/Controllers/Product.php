@@ -66,6 +66,8 @@ class Product extends \Core\Controller
             'suggestions' => $suggestions
         ]);
     }
-
+    public function contactAction(){
+        View::renderTemplate('Product/contact.html');
+    }
     
 }
