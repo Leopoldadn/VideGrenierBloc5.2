@@ -15,7 +15,21 @@ html{
   height: 100%;
   width: 100%;
 }
-
+/*//////////////////////////////zone d'ajout par TEKOS//////////////////////////////// */
+.suppr{
+  border-radius: 50%;
+  background-color: darkred;
+  width: 15px;
+  height: 15px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+/*//////////////////////////////zone d'ajout par TEKOS//////////////////////////////// */
 body.light {
   background-color: #ffffff; }
   body.light .content-wrapper {
