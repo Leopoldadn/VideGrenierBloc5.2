@@ -78,4 +78,5 @@ class Product extends \Core\Controller
         View::renderTemplate('User/confidentialiter.html');
         
     }
+
 }
