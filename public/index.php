@@ -38,6 +38,7 @@ $router->add('product/{id:\d+}', ['controller' => 'Product', 'action' => 'show']
 $router->add('oublie');
 $router->add('mail', ['controller' => 'Product', 'action' => 'mail']);
 $router->add('cookie', ['controller' => 'Product', 'action' => 'cookie']);
+$router->add('confidentialiter', ['controller' => 'Product', 'action' => 'confidentialiter']);
 $router->add('{controller}/{action}');
 
 
