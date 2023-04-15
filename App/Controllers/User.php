@@ -65,9 +65,11 @@ echo"test";
     public function accountAction()
     {
         $articles = Articles::getByUser($_SESSION['user']['id']);
-
+        //$user = User::getOne($_SESSION['user']['id']);
         View::renderTemplate('User/account.html', [
-            'articles' => $articles
+            'articles' => $articles,
+            //user que j'aurais recup
+
         ]);
     }
 
@@ -115,6 +117,7 @@ echo"test";
             $_SESSION['user'] = array(
                 'id' => $user['id'],
                 'username' => $user['username'],
+                'email' => $user['email'],
             );
 
             return true;

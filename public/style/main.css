@@ -18,13 +18,13 @@ html{
 /*//////////////////////////////zone d'ajout par TEKOS//////////////////////////////// */
 .suppr{
   border-radius: 50%;
-  background-color: darkred;
-  width: 15px;
-  height: 15px;
+  background-color: rgb(220, 25, 25);
+  width: 20px;
+  height: 20px;
   color: white;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
   font-size: 10px;
   font-weight: bold;
   cursor: pointer;

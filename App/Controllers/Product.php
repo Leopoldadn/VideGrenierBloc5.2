@@ -79,4 +79,15 @@ class Product extends \Core\Controller
         
     }
 
+    public function oublieAction(){
+
+        View::renderTemplate('User/oublie.html');
+        
+    }
+
+    public function poliGreAction(){
+
+        View::renderTemplate('User/poliGre.html');
+        
+    }
 }

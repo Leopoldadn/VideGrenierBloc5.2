@@ -62,5 +62,24 @@ class User extends Model {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * ?
+     * @access public
+     * @return string|boolean
+     * @throws Exception
+     */
+    public static function getOne($id) {
+        $db = static::getDB();
+
+        $stmt = $db->prepare('
+            SELECT * FROM articles
+            INNER JOIN users ON articles.user_id = users.id
+            WHERE articles.id = ? 
+            LIMIT 1');
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
 }
