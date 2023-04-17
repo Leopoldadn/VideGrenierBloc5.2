@@ -25,27 +25,28 @@
                                 <div class="form-group">
                                     <label for="e1">Titre</label>
                                     <input type="text" name="name" class="form-control" id="e1"
-                                           placeholder="Jeu de cartes (rare)">
+                                        placeholder="Jeu de cartes (rare)" required>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="e2">Description</label>
-                                    <textarea class="form-control" name="description" id="e2" rows="3"></textarea>
+                                    <textarea class="form-control" name="description" id="e2" rows="3" required></textarea>
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="e2">Ville</label>
-                                    <input class="form-control cityAutoComplete" type="text" autocomplete="off"/>
+                                    <input id="btn_select" list="brow" onkeyup="getWritedText()">
+                                    <select id="brow"></select>  
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="e3">Image</label>
-                                    <input type="file" class="form-control" name="picture" id="e3" rows="3"/>
+                                    <input type="file" class="form-control" name="picture" id="e3" rows="3" required />
                                 </div>
                             </div>
                         </div>
@@ -55,9 +56,13 @@
                         <form action="#" method="post">
                             <button name="submit" class="btn btn-primary u-btn">Valider</button>
                         </form>
+                        {% if error_message %}
+                        <div class="alert alert-danger">{{ error_message }}</div>
+                        {% endif %}
                     </div>
                     <div class="u-terms">
-                        <p>En soumettant votre article vous acceptez les <a href="#">conditions générales</a> de Vide Grenier en
+                        <p>En soumettant votre article vous acceptez les <a href="#">conditions générales</a> de Vide
+                            Grenier en
                             ligne.</p>
                     </div>
                 </div>
@@ -68,22 +73,32 @@
 {% endblock body %}
 
 {% block javascript %}
-    <script type="text/javascript">
-        $('.cityAutoComplete').autoComplete({
-            resolver: 'custom',
-            events: {
-                search: function (qry, callback) {
-                    // let's do a custom ajax call
-                    $.ajax(
-                        '/api/cities',
-                        {
-                            data: { 'query': qry}
-                        }
-                    ).done(function (res) {
-                        callback(res)
-                    });
-                }
+
+<script type="text/javascript">
+    const countriesDropDown = document.getElementById("brow");
+
+    function getWritedText(){
+        let data = document.getElementById("btn_select").value;
+        getCities(data);
+    }
+    function getCities(option = '') {
+        $.ajax({
+            url: "/api/cities"+ '?query=' + option,
+        }).done(function (result) {
+        console.log(countriesDropDown.lengt)
+        //    for (var i=0; i<countriesDropDown.length; i++) {
+        //         countriesDropDown.remove(i);
+        //     }
+        //TODO:remove all options from countriesDropDown 
+
+            for (let key in result) {
+                let option = document.createElement("option");
+                option.setAttribute('value', result[key].ville_id);
+                let optionText = document.createTextNode(result[key].ville_nom);
+                option.appendChild(optionText);
+                countriesDropDown.appendChild(option);
             }
         });
-    </script>
+    }
+</script>
 {% endblock %}

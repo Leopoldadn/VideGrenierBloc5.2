@@ -21,7 +21,6 @@ class Articles extends Model {
      */
     public static function getAll($filter) {
         $db = static::getDB();
-
         $query = 'SELECT * FROM articles ';
 
         switch ($filter){
@@ -38,6 +37,19 @@ class Articles extends Model {
         $stmt = $db->query($query);
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function remove($id){
+        $db = static::getDB();
+
+        $stmt = $db->prepare('
+            DELETE from articles
+            
+            WHERE articles.id = ? 
+            ');
+
+        $stmt->execute([$id]);
+
     }
 
     /**

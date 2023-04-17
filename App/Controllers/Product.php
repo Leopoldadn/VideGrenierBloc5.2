@@ -19,13 +19,18 @@ class Product extends \Core\Controller
     public function indexAction()
     {
 
-        if(isset($_POST['submit'])) {
+        if (isset($_POST['submit'])) {
 
-            try {
-                $f = $_POST;
+            $f = $_POST;
 
-                // TODO: Validation
-
+            // Validation
+            $allowed_extensions = array('png', 'jpeg', 'jpg');
+            $picture_extension = strtolower(pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION));
+            if (!in_array($picture_extension, $allowed_extensions)) {
+                $error_message = "Seules les images en .png, .jpeg et .jpg sont autorisées.";
+                View::renderTemplate('Product/Add.html', ['error_message' => $error_message]);
+                exit();
+            } else {
                 $f['user_id'] = $_SESSION['user']['id'];
                 $id = Articles::save($f);
 
@@ -34,8 +39,6 @@ class Product extends \Core\Controller
                 Articles::attachPicture($id, $pictureName);
 
                 header('Location: /product/' . $id);
-            } catch (\Exception $e){
-                    var_dump($e);
             }
         }
 
@@ -49,7 +52,7 @@ class Product extends \Core\Controller
     public function showAction()
     {
         $id = $this->route_params['id'];
-
+        
         try {
             Articles::addOneView($id);
             $suggestions = Articles::getSuggest();
@@ -63,4 +66,17 @@ class Product extends \Core\Controller
             'suggestions' => $suggestions
         ]);
     }
+
+    
+    public function cookieAction()
+    {
+        View::renderTemplate('User/cookie.html');
+    }
+
+    public function confidentialiterAction(){
+
+        View::renderTemplate('User/confidentialiter.html');
+        
+    }
+
 }
