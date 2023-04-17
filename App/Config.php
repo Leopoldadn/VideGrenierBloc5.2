@@ -14,13 +14,13 @@ class Config
      * Database host
      * @var string
      */
-    const DB_HOST = 'localhost';
+    const DB_HOST = 'bddpreprod';
 
     /**
      * Database name
      * @var string
      */
-    const DB_NAME = 'vide-grenier';
+    const DB_NAME = 'videgrenierenligne';
 
     /**
      * Database user
