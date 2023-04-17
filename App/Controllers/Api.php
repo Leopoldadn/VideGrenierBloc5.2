@@ -12,6 +12,10 @@ use Exception;
  */
 class Api extends \Core\Controller
 {
+    public function __construct($route_params)
+    {
+        parent::__construct($route_params);
+    }
 
     /**
      * Affiche la liste des articles / produits pour la page d'accueil

@@ -61,6 +61,30 @@ class User extends Model {
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+    public static function getOne($id)
+    {
+        $db = static::getDB();
+
+        $stmt = $db->prepare('SELECT * FROM users WHERE id = ? LIMIT 1');
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
+    public static function resetPassword($email)
+    {
+        $db = static::getDB();
+        $user = static::getByLogin($email);
+
+        $password = Hash::generateUnique();
+        $hashed = Hash::generate($password, $user['salt']);
+        $stmt = $db->prepare('UPDATE users SET password=? WHERE email=?');
+
+        $stmt->execute([$hashed, $email]);
+
+        return $password;
+    }
 
 
 }
