@@ -5,11 +5,11 @@
 {% block body %}
 
 <div class="channel">
-
     <div class="container-fluid account-header">
         <div class="row">
             <h1>
-                {{ user.username }}
+                <h1>Bienvenue, {{ user.username }}!</h1>
+                <div class="titreMc">Adresse e-mail: {{ user.email }} </div>
             </h1>
 
         </div>
@@ -35,45 +35,83 @@
                             <div class="row">
                                 <div class="col-lg-8 col-xs-6">
                                     <div class="btn-group bg-clean">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Plus récent <span class="caret"></span>
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#"><i class="cv cvicon-cv-relevant"></i> Popularité</a></li>
-                                            <li><a href="#"><i class="cv cvicon-cv-calender"></i> Plus récent</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cb-content articlelist">
-                            <div class="row">
-                                {% for article in articles %}
-                                <div class=" col-lg-3 col-sm-6 articleitem">
-                                    <div class="b-article">
-                                        <div class="v-img">
-                                            <a
-                                                    href="{{ ('/product/' ~ article.id) }}"><img
-                                                    src="{{ ('/storage/' ~ article.picture) }}" alt=""></a>
-                                        </div>
-                                        <div class="v-desc">
-                                            <a href="{{ ('/product/' ~ article.id) }}">{{ article.name }}</a>
-                                        </div>
-                                        <div class="v-views">
-                                            {{article.views}} vues
+                                        <div class="col-lg-2 col-sm-2 col-xs-4">
+                                            <div class="btn-group pull-right bg-clean">
+                                                <button type="button" class="btn btn-default dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Filtrer par <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a onclick="getProductsAndRender('views')"><i
+                                                                class="cv cvicon-cv-calender"></i>
+                                                            Popularité</a></li>
+                                                    <li><a onclick="getProductsAndRender('date')"><i
+                                                                class="cv cvicon-cv-calender"></i>
+                                                            Récent</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="clearfix"></div>
                                         </div>
                                     </div>
                                 </div>
-                                {% endfor %}
+                            </div>
+                            <div class="cb-content articlelist">
+                                <div class="row">
+                                    {% for article in articles %}
+                                    <div class=" col-lg-3 col-sm-6 articleitem">
+                                        <div class="b-article">
+                                            <div class="v-img">
+                                                <a href="{{ ('/product/' ~ article.id) }}"><img
+                                                        src="{{ ('/storage/' ~ article.picture) }}" alt=""></a>
+                                            </div>
+                                            <div class="v-desc">
+                                                <a href="{{ ('/product/' ~ article.id) }}">{{ article.name }}</a>
+                                                <button type="button" class="suppr"
+                                                    onclick="return confirmation('Êtes-vous sûr de vouloir supprimer cette annonce?') && DeleteProduct('{{article.id}}')">X</button>
+
+                                            </div>
+                                            <div class="v-views">
+                                                {{article.views}} vues
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
+                        <!-- /Featured Videos -->
                     </div>
-                    <!-- /Featured Videos -->
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-{% endblock %}
+    {% endblock %}
+    {% block javascript %}
+
+    <script type="text/javascript">
+
+        function DeleteProduct(id) {
+            console.log('text', id);
+            $.ajax({
+                url: "/api/remove" + '?id=' + id
+            }).done(function (result) {
+                console.log('done', result);
+            });
+        }
+
+        function confirmation() {
+            if (confirm("Êtes-vous sûr de vouloir supprimer cette annonce ?")) {
+                // Code à exécuter si l'utilisateur clique sur "OK"
+                // Par exemple, envoyer une requête de suppression
+            }
+            else {
+                // Code à exécuter si l'utilisateur clique sur "Annuler"
+            }
+        }
+
+    </script>
+    {% endblock %}

@@ -1,0 +1,49 @@
+version: "3"
+services:
+  bddpreprod:
+    container_name: bddpreprod
+    image: "mysql:latest"
+    restart: "always"
+    environment:
+      MYSQL_USER: webapplication
+      MYSQL_PASSWORD: "cesi"
+      MYSQL_DATABASE: vide-grenier
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - "9000:80"
+    volumes:
+      - bddpreprod:/var/lib/mysql
+      - ./sql/import.sql:/docker-entrypoint-initdb.d/import.sql
+
+  phpmyadmin_preproduction:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    ports:
+      - "9001:80"
+    depends_on:
+      - bddpreprod
+    environment:
+      PMA_HOST: bddpreprod
+
+  videgrenier_preproduction:
+    image: "videgrenierpreprod"
+    ports:
+      - "8080:80"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      ALLOW_OVERRIDE: "true"
+      MYSQL_HOST: bddpreprod
+      MYSQL_USER: webapplication
+      MYSQL_PASSWORD: "cesi"
+
+    depends_on:
+      - bddpreprod
+
+    links:
+      - bddpreprod:mysql
+
+volumes:
+  bddpreprod:
+    external: true

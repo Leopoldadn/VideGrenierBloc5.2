@@ -19,7 +19,13 @@
                                             <span class="hidden-xs">À la une</span>
                                         </a>
                                     </li>
-                                    <li><a href="#">Autour de moi</a></li>
+<<<<<<< HEAD
+                                    <li><button onclick="stLoc()">Autour de moi </button></li>
+                                    <p id="demo"></p>
+=======
+                                    <li><button class="adm" onclick="getLocation()">Autour de moi </button></script></li>
+                                    
+>>>>>>> 020711f3d286c83d0c966ad6749472af62df382b
                                 </ul>
                             </div>
                             <div class="col-lg-2 col-sm-2 col-xs-4">
@@ -59,6 +65,7 @@
     <script type="text/javascript">
 
         function getProductsAndRender(option = ''){
+            console.log ("index");
             $.ajax({
                 url: "/api/products" + '?sort=' + option,
             }).done(function(result) {
@@ -88,8 +95,50 @@
              .appendTo($('#articlelist'));
         }
 
-        $( document ).ready(function() {
-            getProductsAndRender();
-        });
+        //Géolocalisation
+
+        var valuesX=[],
+            lastPos={a: -1, b: -1};
+        //This is to show the current position:
+
+        function handleLoc(pos)  {
+            // in event handler remember lastPos to use it in stLoc on click.
+            lastPos.a = pos.coords.latitude;
+            lastPos.b = pos.coords.longitude;
+            var p = new L.LatLng(lastPos.a, lastPos.b);
+            mark(p);
+        }
+
+        //Here I intend to store the latitude using "valuesX.push":
+
+        function stLoc()  {
+            if(lastPos.a != -1) {
+                valuesX.push(lastPos.a);
+            }
+            return false;
+            //console.log()
+        }
+
+        //And this is to enable the geolocation:
+        // function handleErr(pos) {
+        //     document.write("could not determine location");
+        // }
+
+        // if(navigator.geolocation) {
+        //     navigator.geolocation.watchPosition(handleLoc,handleErr);
+        // }
+        // else {
+        //     document.write("geolocation not supported");
+        // }
+        // console.log(stLoc())
     </script>
 {% endblock %}
+
+
+
+
+
+
+
+
+

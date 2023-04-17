@@ -44,7 +44,7 @@ class User extends \Core\Controller
     {
         if(isset($_POST['submit'])){
             $f = $_POST;
-
+echo"test";
             if($f['password'] !== $f['password-check']){
                 // TODO: Gestion d'erreur côté utilisateur
             }
@@ -52,7 +52,8 @@ class User extends \Core\Controller
             // validation
 
             $this->register($f);
-            // TODO: Rappeler la fonction de login pour connecter l'utilisateur
+            // TODO: Rappeler la fonction de login pour connecter l'utilisateur //fait
+            $this->login($f);
         }
 
         View::renderTemplate('User/register.html');
@@ -157,5 +158,7 @@ class User extends \Core\Controller
 
         return true;
     }
+    
 
+    
 }
