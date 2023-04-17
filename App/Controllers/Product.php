@@ -72,4 +72,11 @@ class Product extends \Core\Controller
     {
         View::renderTemplate('User/cookie.html');
     }
+
+    public function confidentialiterAction(){
+
+        View::renderTemplate('User/confidentialiter.html');
+        
+    }
+
 }
